@@ -1,9 +1,10 @@
 import React from 'react'
-import { Text, View, TextInput, Pressable } from "react-native";
+import { Text, View, TextInput, Pressable, Alert } from "react-native";
 import { useState, useEffect } from "react";
+import PrimaryButton from '@/components/PrimaryButton';
 
 
-function Starting() {
+function Starting(probs: any) {
 
 
  const [originalnumber, setNumber] = useState("");
@@ -16,9 +17,12 @@ function resetnumber(){
     setNumber("");
   }
   function onconfirm(){
-    if(originalnumber==""){
-        console.log("Please enter a number")
+    if(originalnumber==""|| !validation){
+       Alert.alert("Invalid Input", "Please enter a valid number between 0 and 99.");
 
+    }else{
+      probs.makeconfirm(originalnumber);
+      setNumber("");
     }
   }
   function isnumbervalid() {
@@ -66,13 +70,9 @@ function resetnumber(){
       
         <View style={{marginTop: 20, display: "flex", flexDirection: "row", gap: 10, justifyContent: "space-between", width: "60%" }}>
 
-          <Pressable   android_ripple={{ color: 'white' }} style={{ borderColor:"white", borderWidth:1 ,width:80,height:35, }} >
-<Text  style={{color:"white" , margin:"auto" }} onPress={resetnumber} >Reset</Text>
-          </Pressable>
-          <Pressable  onPress={onconfirm}   android_ripple={{ color: 'white' }} style={{ borderColor:"white", borderWidth:1 ,width:80,height:35, }} >
-<Text   style={{color:"white" , margin:"auto" }} >Confirm</Text>
-
-          </Pressable>
+          <PrimaryButton  onpress={resetnumber} buttontext={"Reset"}  />
+          
+          <PrimaryButton onpress={onconfirm}  buttontext={"Confirm"}   />
          
         </View>
         
