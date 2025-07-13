@@ -1,16 +1,19 @@
-import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, ScrollView, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PrimaryButton from '@/components/PrimaryButton';
 
 
-const GameScreen = () => {
-  function increase() {
+const GameScreen = ({ confirmnumber ,setGameover ,opponentguess,setOpponentguess,increase,decrease}: any) => {
 
-  }
-  function decrease() {
-
-  }
+  
+  useEffect(() => {
+   
+    if (opponentguess == confirmnumber) {
+      Alert.alert("Congratulations!", "Your opponent has guessed the number correctly!");
+setGameover(true);
+    }
+  });
   return (
     <SafeAreaView style={{ display: "flex", justifyContent: "center", alignItems: "center" }}  >
 
@@ -19,7 +22,7 @@ const GameScreen = () => {
       </View>
 
       <View style={{ height: 70, width: "30%", display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20, borderBottomWidth: 1, borderColor: "white" }}  >
-        <Text style={{ color: "white", fontSize: 40 }} >56  </Text>
+        <Text style={{ color: "white", fontSize: 40 }} >{opponentguess} </Text>
       </View>
       <View style={{ marginTop: 40, display: "flex", flexDirection: "row", gap: 10, justifyContent: "space-between", width: "60%" }}>
 
